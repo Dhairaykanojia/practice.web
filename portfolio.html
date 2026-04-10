@@ -1,0 +1,482 @@
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dhairay Kanojia — Portfolio</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet">
+  <style>
+  html, body { height: 100%; margin: 0; }
+  * { box-sizing: border-box; }
+  :root {
+    --bg: #0a0a0f;
+    --surface: rgba(255,255,255,0.04);
+    --text: #e2e0ff;
+    --accent: #7c3aed;
+    --accent2: #06b6d4;
+  }
+  body { font-family: 'Syne', sans-serif; background: var(--bg); color: var(--text); }
+
+  .glass {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+
+  .gradient-text {
+    background: linear-gradient(135deg, #7c3aed, #06b6d4);
+    background-clip: text;
+
+    -webkit-text-fill-color: transparent;
+  }
+
+  .hero-glow {
+    position: absolute;
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.15;
+    pointer-events: none;
+  }
+
+  /* Animations */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+  @keyframes pulseGlow {
+    0%, 100% { opacity: 0.15; }
+    50% { opacity: 0.25; }
+  }
+  .animate-fade-up {
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards;
+  }
+  .delay-1 { animation-delay: 0.15s; }
+  .delay-2 { animation-delay: 0.3s; }
+  .delay-3 { animation-delay: 0.45s; }
+  .delay-4 { animation-delay: 0.6s; }
+
+  .scroll-reveal { opacity: 0; transform: translateY(30px); transition: all 0.7s ease; }
+  .scroll-reveal.visible { opacity: 1; transform: translateY(0); }
+
+  .skill-bar-fill { transition: width 1.2s cubic-bezier(0.25, 1, 0.5, 1); }
+
+  .project-card:hover .project-overlay { opacity: 1; }
+  .project-card:hover { transform: translateY(-6px); border-color: rgba(124,58,237,0.3); }
+
+  nav a { position: relative; }
+  nav a::after {
+    content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 2px;
+    background: linear-gradient(90deg, #7c3aed, #06b6d4);
+    transition: width 0.3s ease;
+  }
+  nav a:hover::after { width: 100%; }
+
+  .contact-link:hover { border-color: #7c3aed; background: rgba(124,58,237,0.08); }
+
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: #0a0a0f; }
+  ::-webkit-scrollbar-thumb { background: #7c3aed44; border-radius: 3px; }
+</style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full">
+  <div id="app" class="w-full h-full overflow-auto"><!-- Nav -->
+   <header class="fixed top-0 left-0 w-full z-50 glass" style="background:rgba(10,10,15,0.8);">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between"><a href="#hero" class="text-xl font-extrabold gradient-text" style="font-family:'Space Mono',monospace;">DK</a>
+     <nav class="hidden md:flex gap-8 text-sm font-semibold tracking-wide"><a href="#about" class="hover:text-white transition">About</a> <a href="#skills" class="hover:text-white transition">Skills</a> <a href="#projects" class="hover:text-white transition">Projects</a> <a href="#education" class="hover:text-white transition">Education</a> <a href="#contact" class="hover:text-white transition">Contact</a>
+     </nav><button id="mobileMenuBtn" class="md:hidden text-white"><i data-lucide="menu" style="width:24px;height:24px;"></i></button>
+    </div>
+    <div id="mobileMenu" class="hidden md:hidden px-6 pb-4 flex flex-col gap-3 text-sm font-semibold"><a href="#about" class="py-1 hover:text-white transition">About</a> <a href="#skills" class="py-1 hover:text-white transition">Skills</a> <a href="#projects" class="py-1 hover:text-white transition">Projects</a> <a href="#education" class="py-1 hover:text-white transition">Education</a> <a href="#contact" class="py-1 hover:text-white transition">Contact</a>
+    </div>
+   </header><!-- Hero -->
+   <section id="hero" class="relative min-h-full flex items-center justify-center px-6 overflow-hidden">
+    <div class="hero-glow" style="top:10%;left:15%;background:#7c3aed;animation:pulseGlow 4s ease infinite;"></div>
+    <div class="hero-glow" style="bottom:10%;right:10%;background:#06b6d4;animation:pulseGlow 4s ease infinite 2s;"></div>
+    <div class="text-center relative z-10 max-w-3xl">
+     <p class="animate-fade-up text-sm tracking-[0.35em] uppercase mb-4" style="color:#06b6d4;font-family:'Space Mono',monospace;">Hello, I'm</p>
+     <h1 id="heroName" class="animate-fade-up delay-1 text-5xl sm:text-7xl font-extrabold leading-tight gradient-text">Dhairay Kanojia</h1>
+     <p id="heroTitle" class="animate-fade-up delay-2 mt-4 text-lg sm:text-xl opacity-70">Full Stack Developer | AI &amp; Automation Enthusiast</p>
+     <div class="animate-fade-up delay-3 mt-10 flex gap-4 justify-center flex-wrap"><a href="#projects" class="px-8 py-3 rounded-full font-bold text-sm transition-all hover:scale-105" style="background:linear-gradient(135deg,#7c3aed,#06b6d4);color:#fff;">View Projects</a> <a href="#contact" class="px-8 py-3 rounded-full font-bold text-sm border border-white/10 hover:border-white/30 transition-all hover:scale-105">Contact Me</a>
+     </div>
+     <div class="animate-fade-up delay-4 mt-12 animate-bounce"><i data-lucide="chevron-down" style="width:28px;height:28px;opacity:0.3;margin:0 auto;"></i>
+     </div>
+    </div>
+   </section><!-- About -->
+   <section id="about" class="py-24 px-6">
+    <div class="max-w-4xl mx-auto scroll-reveal">
+     <h2 class="text-3xl sm:text-4xl font-extrabold mb-2 gradient-text">About Me</h2>
+     <div class="w-16 h-1 rounded mb-8" style="background:linear-gradient(90deg,#7c3aed,#06b6d4);"></div>
+     <div class="glass rounded-2xl p-8 sm:p-10">
+      <p id="aboutText" class="text-base sm:text-lg leading-relaxed opacity-80">I am a passionate Full Stack Developer with a strong interest in building scalable and user-friendly web applications. After completing my 12th grade, I have been actively learning both frontend and backend technologies to develop complete web solutions. I enjoy working on real-world projects, integrating AI tools, and continuously improving my development skills. My goal is to build efficient, modern, and impactful digital products.</p>
+      <div class="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-4">
+       <div class="text-center p-4 rounded-xl" style="background:rgba(124,58,237,0.06);border:1px solid rgba(124,58,237,0.12);">
+        <div class="text-2xl font-extrabold gradient-text">
+         3+
+        </div>
+        <div class="text-xs mt-1 opacity-50">
+         Projects
+        </div>
+       </div>
+       <div class="text-center p-4 rounded-xl" style="background:rgba(6,182,212,0.06);border:1px solid rgba(6,182,212,0.12);">
+        <div class="text-2xl font-extrabold gradient-text">
+         5+
+        </div>
+        <div class="text-xs mt-1 opacity-50">
+         Technologies
+        </div>
+       </div>
+       <div class="text-center p-4 rounded-xl" style="background:rgba(124,58,237,0.06);border:1px solid rgba(124,58,237,0.12);">
+        <div class="text-2xl font-extrabold gradient-text">
+         ∞
+        </div>
+        <div class="text-xs mt-1 opacity-50">
+         Curiosity
+        </div>
+       </div>
+       <div class="text-center p-4 rounded-xl" style="background:rgba(6,182,212,0.06);border:1px solid rgba(6,182,212,0.12);">
+        <div class="text-2xl font-extrabold gradient-text">
+         24/7
+        </div>
+        <div class="text-xs mt-1 opacity-50">
+         Learning
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Skills -->
+   <section id="skills" class="py-24 px-6" style="background:rgba(255,255,255,0.01);">
+    <div class="max-w-4xl mx-auto">
+     <div class="scroll-reveal">
+      <h2 class="text-3xl sm:text-4xl font-extrabold mb-2 gradient-text">Skills</h2>
+      <div class="w-16 h-1 rounded mb-10" style="background:linear-gradient(90deg,#7c3aed,#06b6d4);"></div>
+     </div>
+     <div class="grid sm:grid-cols-2 gap-6">
+      <div class="glass rounded-2xl p-6 scroll-reveal">
+       <div class="flex items-center gap-3 mb-5">
+        <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background:rgba(124,58,237,0.15);">
+         <i data-lucide="code-2" style="width:20px;height:20px;color:#7c3aed;"></i>
+        </div>
+        <h3 class="font-bold text-lg">Frontend</h3>
+       </div>
+       <div class="space-y-4" id="frontendSkills">
+        <div>
+         <div class="flex justify-between text-sm mb-1">
+          <span>HTML5</span><span class="opacity-50">90%</span>
+         </div>
+         <div class="w-full h-2 rounded-full" style="background:rgba(255,255,255,0.05);">
+          <div class="skill-bar-fill h-full rounded-full" data-width="90" style="width:0%;background:linear-gradient(90deg,#7c3aed,#06b6d4);"></div>
+         </div>
+        </div>
+        <div>
+         <div class="flex justify-between text-sm mb-1">
+          <span>CSS3</span><span class="opacity-50">85%</span>
+         </div>
+         <div class="w-full h-2 rounded-full" style="background:rgba(255,255,255,0.05);">
+          <div class="skill-bar-fill h-full rounded-full" data-width="85" style="width:0%;background:linear-gradient(90deg,#7c3aed,#06b6d4);"></div>
+         </div>
+        </div>
+        <div>
+         <div class="flex justify-between text-sm mb-1">
+          <span>JavaScript</span><span class="opacity-50">80%</span>
+         </div>
+         <div class="w-full h-2 rounded-full" style="background:rgba(255,255,255,0.05);">
+          <div class="skill-bar-fill h-full rounded-full" data-width="80" style="width:0%;background:linear-gradient(90deg,#7c3aed,#06b6d4);"></div>
+         </div>
+        </div>
+        <div>
+         <div class="flex justify-between text-sm mb-1">
+          <span>React (Basic)</span><span class="opacity-50">40%</span>
+         </div>
+         <div class="w-full h-2 rounded-full" style="background:rgba(255,255,255,0.05);">
+          <div class="skill-bar-fill h-full rounded-full" data-width="40" style="width:0%;background:linear-gradient(90deg,#7c3aed,#06b6d4);"></div>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="glass rounded-2xl p-6 scroll-reveal">
+       <div class="flex items-center gap-3 mb-5">
+        <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background:rgba(6,182,212,0.15);">
+         <i data-lucide="wrench" style="width:20px;height:20px;color:#06b6d4;"></i>
+        </div>
+        <h3 class="font-bold text-lg">Tools &amp; Other</h3>
+       </div>
+       <div class="space-y-4">
+        <div>
+         <div class="flex justify-between text-sm mb-1">
+          <span>Git &amp; GitHub</span><span class="opacity-50">75%</span>
+         </div>
+         <div class="w-full h-2 rounded-full" style="background:rgba(255,255,255,0.05);">
+          <div class="skill-bar-fill h-full rounded-full" data-width="75" style="width:0%;background:linear-gradient(90deg,#06b6d4,#7c3aed);"></div>
+         </div>
+        </div>
+        <div>
+         <div class="flex justify-between text-sm mb-1">
+          <span>Python</span><span class="opacity-50">50%</span>
+         </div>
+         <div class="w-full h-2 rounded-full" style="background:rgba(255,255,255,0.05);">
+          <div class="skill-bar-fill h-full rounded-full" data-width="50" style="width:0%;background:linear-gradient(90deg,#06b6d4,#7c3aed);"></div>
+         </div>
+        </div>
+        <div>
+         <div class="flex justify-between text-sm mb-1">
+          <span>AI Tools</span><span class="opacity-50">70%</span>
+         </div>
+         <div class="w-full h-2 rounded-full" style="background:rgba(255,255,255,0.05);">
+          <div class="skill-bar-fill h-full rounded-full" data-width="70" style="width:0%;background:linear-gradient(90deg,#06b6d4,#7c3aed);"></div>
+         </div>
+        </div>
+        <div>
+         <div class="flex justify-between text-sm mb-1">
+          <span>Canva / Figma</span><span class="opacity-50">60%</span>
+         </div>
+         <div class="w-full h-2 rounded-full" style="background:rgba(255,255,255,0.05);">
+          <div class="skill-bar-fill h-full rounded-full" data-width="60" style="width:0%;background:linear-gradient(90deg,#06b6d4,#7c3aed);"></div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Projects -->
+   <section id="projects" class="py-24 px-6">
+    <div class="max-w-4xl mx-auto">
+     <div class="scroll-reveal">
+      <h2 class="text-3xl sm:text-4xl font-extrabold mb-2 gradient-text">Projects</h2>
+      <div class="w-16 h-1 rounded mb-10" style="background:linear-gradient(90deg,#7c3aed,#06b6d4);"></div>
+     </div>
+     <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"><!-- Project 1 -->
+      <div class="project-card glass rounded-2xl overflow-hidden transition-all duration-300 scroll-reveal cursor-default">
+       <div class="h-40 flex items-center justify-center relative" style="background:linear-gradient(135deg,rgba(124,58,237,0.15),rgba(6,182,212,0.1));">
+        <div style="font-size:56px;">
+         🤖
+        </div>
+        <div class="project-overlay absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300" style="background:rgba(10,10,15,0.85);"><span class="text-sm font-bold" style="color:#06b6d4;">Python · Voice · AI</span>
+        </div>
+       </div>
+       <div class="p-5">
+        <h3 class="font-bold text-lg mb-1">AI Voice Assistant</h3>
+        <p class="text-sm opacity-50 leading-relaxed">Mini Jarvis built with Python. Takes voice commands, performs tasks using speech recognition &amp; text-to-speech.</p>
+       </div>
+      </div><!-- Project 2 -->
+      <div class="project-card glass rounded-2xl overflow-hidden transition-all duration-300 scroll-reveal cursor-default">
+       <div class="h-40 flex items-center justify-center relative" style="background:linear-gradient(135deg,rgba(6,182,212,0.15),rgba(124,58,237,0.1));">
+        <div style="font-size:56px;">
+         🌐
+        </div>
+        <div class="project-overlay absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300" style="background:rgba(10,10,15,0.85);"><span class="text-sm font-bold" style="color:#7c3aed;">HTML · CSS · JS</span>
+        </div>
+       </div>
+       <div class="p-5">
+        <h3 class="font-bold text-lg mb-1">Portfolio Website</h3>
+        <p class="text-sm opacity-50 leading-relaxed">Fully responsive modern design with clean UI and smooth animations. Showcases skills and projects.</p>
+       </div>
+      </div><!-- Project 3 -->
+      <div class="project-card glass rounded-2xl overflow-hidden transition-all duration-300 scroll-reveal cursor-default">
+       <div class="h-40 flex items-center justify-center relative" style="background:linear-gradient(135deg,rgba(124,58,237,0.1),rgba(6,182,212,0.15));">
+        <div style="font-size:56px;">
+         🎨
+        </div>
+        <div class="project-overlay absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300" style="background:rgba(10,10,15,0.85);"><span class="text-sm font-bold" style="color:#06b6d4;">HTML · CSS · UI/UX</span>
+        </div>
+       </div>
+       <div class="p-5">
+        <h3 class="font-bold text-lg mb-1">Modern Landing Page</h3>
+        <p class="text-sm opacity-50 leading-relaxed">Clean landing page focused on UI/UX design principles and modern layout techniques.</p>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Education -->
+   <section id="education" class="py-24 px-6" style="background:rgba(255,255,255,0.01);">
+    <div class="max-w-4xl mx-auto">
+     <div class="scroll-reveal">
+      <h2 class="text-3xl sm:text-4xl font-extrabold mb-2 gradient-text">Education</h2>
+      <div class="w-16 h-1 rounded mb-10" style="background:linear-gradient(90deg,#7c3aed,#06b6d4);"></div>
+     </div>
+     <div class="scroll-reveal">
+      <div class="glass rounded-2xl p-8 relative overflow-hidden">
+       <div class="absolute top-0 left-0 w-1 h-full" style="background:linear-gradient(180deg,#7c3aed,#06b6d4);"></div>
+       <div class="pl-6">
+        <div class="flex items-center gap-3 mb-2"><i data-lucide="graduation-cap" style="width:24px;height:24px;color:#7c3aed;"></i>
+         <h3 class="font-bold text-xl">12th Grade — Completed</h3>
+        </div>
+        <p class="text-sm opacity-50 mb-4">Completed senior secondary education</p>
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold" style="background:rgba(6,182,212,0.08);border:1px solid rgba(6,182,212,0.15);color:#06b6d4;"><i data-lucide="zap" style="width:14px;height:14px;"></i> Self-learning Web Dev &amp; AI Technologies
+        </div>
+       </div>
+      </div>
+      <div class="mt-8 grid sm:grid-cols-2 gap-4">
+       <div class="glass rounded-xl p-5 flex items-start gap-4"><i data-lucide="rocket" style="width:20px;height:20px;color:#7c3aed;flex-shrink:0;margin-top:2px;"></i>
+        <div>
+         <h4 class="font-bold text-sm">Fast Learner</h4>
+         <p class="text-xs opacity-40 mt-1">Quickly adapts to new technologies</p>
+        </div>
+       </div>
+       <div class="glass rounded-xl p-5 flex items-start gap-4"><i data-lucide="lightbulb" style="width:20px;height:20px;color:#06b6d4;flex-shrink:0;margin-top:2px;"></i>
+        <div>
+         <h4 class="font-bold text-sm">Problem Solver</h4>
+         <p class="text-xs opacity-40 mt-1">Creative approach to challenges</p>
+        </div>
+       </div>
+       <div class="glass rounded-xl p-5 flex items-start gap-4"><i data-lucide="target" style="width:20px;height:20px;color:#7c3aed;flex-shrink:0;margin-top:2px;"></i>
+        <div>
+         <h4 class="font-bold text-sm">Consistent &amp; Dedicated</h4>
+         <p class="text-xs opacity-40 mt-1">Committed to daily progress</p>
+        </div>
+       </div>
+       <div class="glass rounded-xl p-5 flex items-start gap-4"><i data-lucide="sparkles" style="width:20px;height:20px;color:#06b6d4;flex-shrink:0;margin-top:2px;"></i>
+        <div>
+         <h4 class="font-bold text-sm">Creative Mindset</h4>
+         <p class="text-xs opacity-40 mt-1">Designs with purpose and style</p>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Contact -->
+   <section id="contact" class="py-24 px-6">
+    <div class="max-w-4xl mx-auto">
+     <div class="scroll-reveal">
+      <h2 class="text-3xl sm:text-4xl font-extrabold mb-2 gradient-text">Get In Touch</h2>
+      <div class="w-16 h-1 rounded mb-10" style="background:linear-gradient(90deg,#7c3aed,#06b6d4);"></div>
+     </div>
+     <div class="scroll-reveal glass rounded-2xl p-8 sm:p-10 text-center">
+      <p class="text-lg opacity-60 mb-8 max-w-lg mx-auto">Interested in working together or have a project in mind? Let's connect!</p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center"><a id="contactEmailLink" href="mailto:dhairaykanojia@email.com" class="contact-link flex items-center justify-center gap-3 px-6 py-4 rounded-xl border border-white/8 transition-all duration-300"> <i data-lucide="mail" style="width:20px;height:20px;color:#7c3aed;"></i> <span id="contactEmailText" class="text-sm font-semibold">dhairaykanojia@email.com</span> </a> <a id="contactGithubLink" href="https://github.com/dhairaykanojia" target="_blank" rel="noopener noreferrer" class="contact-link flex items-center justify-center gap-3 px-6 py-4 rounded-xl border border-white/8 transition-all duration-300"> <i data-lucide="github" style="width:20px;height:20px;color:#06b6d4;"></i> <span id="contactGithubText" class="text-sm font-semibold">github.com/dhairaykanojia</span> </a>
+      </div>
+     </div>
+    </div>
+   </section><!-- Footer -->
+   <footer class="py-8 px-6 text-center border-t border-white/5">
+    <p class="text-xs opacity-30" style="font-family:'Space Mono',monospace;">© 2025 Dhairay Kanojia. Built with passion.</p>
+   </footer>
+  </div>
+  <script>
+  const defaultConfig = {
+    hero_name: 'Dhairay Kanojia',
+    hero_title: 'Full Stack Developer | AI & Automation Enthusiast',
+    about_text: 'I am a passionate Full Stack Developer with a strong interest in building scalable and user-friendly web applications. After completing my 12th grade, I have been actively learning both frontend and backend technologies to develop complete web solutions. I enjoy working on real-world projects, integrating AI tools, and continuously improving my development skills. My goal is to build efficient, modern, and impactful digital products.',
+    contact_email: 'dhairaykanojia@gmail.com',
+    contact_github: 'https://github.com/Dhairaykanojia',
+    background_color: '#0a0a0f',
+    surface_color: 'rgba(255,255,255,0.03)',
+    text_color: '#e2e0ff',
+    accent_color: '#7c3aed',
+    accent2_color: '#06b6d4',
+    font_family: 'Syne',
+    font_size: 16
+  };
+
+  function applyConfig(config) {
+    const c = key => config[key] || defaultConfig[key];
+
+    document.getElementById('heroName').textContent = c('hero_name');
+    document.getElementById('heroTitle').textContent = c('hero_title');
+    document.getElementById('aboutText').textContent = c('about_text');
+
+    const email = c('contact_email');
+    document.getElementById('contactEmailText').textContent = email;
+    document.getElementById('contactEmailLink').href = 'mailto:' + email;
+
+    const gh = c('contact_github');
+    document.getElementById('contactGithubText').textContent = gh;
+    const ghUrl = gh.startsWith('http') ? gh : 'https://' + gh;
+    document.getElementById('contactGithubLink').href = ghUrl;
+
+    // Colors
+    document.documentElement.style.setProperty('--bg', c('background_color'));
+    document.documentElement.style.setProperty('--text', c('text_color'));
+    document.body.style.color = c('text_color');
+    document.body.style.background = c('background_color');
+
+    // Font
+    const font = c('font_family');
+    const baseSize = c('font_size');
+    document.body.style.fontFamily = `${font}, sans-serif`;
+
+    document.getElementById('heroName').style.fontSize = `${baseSize * 3.5}px`;
+    document.getElementById('heroTitle').style.fontSize = `${baseSize * 1.2}px`;
+    document.getElementById('aboutText').style.fontSize = `${baseSize}px`;
+  }
+
+  if (window.elementSdk) {
+    window.elementSdk.init({
+      defaultConfig,
+      onConfigChange: async (config) => applyConfig(config),
+      mapToCapabilities: (config) => {
+        const c = key => config[key] || defaultConfig[key];
+        const mut = (key) => ({
+          get: () => c(key),
+          set: (v) => { config[key] = v; window.elementSdk.setConfig({ [key]: v }); }
+        });
+        return {
+          recolorables: [mut('background_color'), mut('surface_color'), mut('text_color'), mut('accent_color'), mut('accent2_color')],
+          borderables: [],
+          fontEditable: mut('font_family'),
+          fontSizeable: { get: () => c('font_size'), set: (v) => { config.font_size = v; window.elementSdk.setConfig({ font_size: v }); } }
+        };
+      },
+      mapToEditPanelValues: (config) => {
+        const c = key => config[key] || defaultConfig[key];
+        return new Map([
+          ['hero_name', c('hero_name')],
+          ['hero_title', c('hero_title')],
+          ['about_text', c('about_text')],
+          ['contact_email', c('contact_email')],
+          ['contact_github', c('contact_github')]
+        ]);
+      }
+    });
+  }
+
+  // Mobile menu
+  document.getElementById('mobileMenuBtn').addEventListener('click', () => {
+    document.getElementById('mobileMenu').classList.toggle('hidden');
+  });
+  document.querySelectorAll('#mobileMenu a').forEach(a => {
+    a.addEventListener('click', () => document.getElementById('mobileMenu').classList.add('hidden'));
+  });
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el));
+
+  // Skill bars
+  const skillObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.querySelectorAll('.skill-bar-fill').forEach(bar => {
+          bar.style.width = bar.dataset.width + '%';
+        });
+      }
+    });
+  }, { threshold: 0.3 });
+  document.querySelectorAll('#skills .glass').forEach(el => skillObserver.observe(el));
+
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+
+  lucide.createIcons();
+</script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9ea2bbd7d3a51c71',t:'MTc3NTgzNDQwOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
